@@ -17,6 +17,7 @@ gem 'twitter'
 gem 'sidekiq'
 gem 'redis'
 gem 'heroku-api'
+gem 'rspec'
 
 group :development do
   gem 'debugger'

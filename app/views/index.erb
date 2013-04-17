@@ -6,15 +6,34 @@
       <input type="text" name="tweet_message" placeholder="What do you want to tell Josh and Eric?">
       <button type="submit">Tweet!</button>
     </form>
+    <div id="job-status"></div>
   <% end %>
 </div>
 
 <script>
+  function check_job_status(job_id){
+    console.log('/status/' + job_id);
+    var request = $.ajax({
+      url: '/status/' + job_id
+    });
+
+    request.done(function(response){
+      console.log(response);
+      if (response === 'true'){
+        $('#job-status').text('done');
+      } else {
+        setTimeout(function(){ check_job_status(job_id) }, 1000);
+      }
+    });
+  };
+
+
   $("form").on("submit",function(e){
     e.preventDefault();
     var post = $.post($(this).attr('action'), $(this).serialize());
-    post.success(function(){
-      alert('yay');
+    post.success(function(job_id){
+      $('#job-status').text('pending');
+      setTimeout(function(){ check_job_status(job_id) }, 1000);
     })
   });
 </script>

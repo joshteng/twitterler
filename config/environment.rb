@@ -28,6 +28,7 @@ require 'oauth'
 require 'twitter'
 require 'sidekiq'
 require 'redis'
+require 'heroku-api'
 
 
 # Some helper constants for path-centric logic
@@ -46,9 +47,26 @@ if Sinatra::Application.development?
   twitter_data = YAML.load_file(APP_ROOT.join('config','twitter.yml'))
   ENV['CONSUMER_KEY'] = twitter_data['consumer_key']
   ENV['CONSUMER_SECRET'] = twitter_data['consumer_secret']
+  heroku_data = YAML.load_file(APP_ROOT.join('config','heroku.yml'))
+  ENV['HEROKU_API_KEY'] = heroku_data['heroku_api']
 end
 
 Twitter.configure do |config|
   config.consumer_key = ENV['CONSUMER_KEY']
   config.consumer_secret = ENV['CONSUMER_SECRET']
 end
+
+Sidekiq.configure_client do |config|
+  config.client_middleware do |chain|
+    chain.add Autoscaler::Sidekiq::Client, 'default' => Autoscaler::HerokuScaler.new
+  end
+end
+
+Sidekiq.configure_server do |config|
+  config.server_middleware do |chain|
+    chain.add(Autoscaler::Sidekiq::Server, Autoscaler::HerokuScaler.new, 60)
+  end
+end
+
+
+

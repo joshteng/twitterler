@@ -16,9 +16,12 @@ end
 
 post '/tweet' do
   current_user.tweet(params[:tweet_message])
-  # twitter_client.update(params[:tweet_message])
 end
 
+
+get '/status/:job_id' do
+  job_is_complete(params[:job_id]).to_s
+end
 
 
 

@@ -26,3 +26,4 @@ bin/
 .env
 *.swp
 config/twitter.yml
+config/heroku.yml

@@ -74,4 +74,7 @@ Sidekiq.configure_server do |config|
 end
 
 
+##gotta configure redis server if deploy to heroku
+# Sidekiq.redis = Redis.new($REDIS_CONFIG)
+#why do u not need to configure it on local development machine?
 

@@ -16,7 +16,7 @@ gem 'oauth'
 gem 'twitter'
 gem 'sidekiq'
 gem 'redis'
-gem 'heroku'
+gem 'heroku-api'
 
 group :development do
   gem 'debugger'

@@ -26,6 +26,8 @@ require 'erb'
 require 'oauth'
 # require 'httparty'
 require 'twitter'
+require 'sidekiq'
+require 'redis'
 
 
 # Some helper constants for path-centric logic

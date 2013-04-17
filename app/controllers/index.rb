@@ -15,22 +15,9 @@ end
 
 
 post '/tweet' do
-  twitter_client.update(params[:tweet_message])
+  current_user.tweet(params[:tweet_message])
+  # twitter_client.update(params[:tweet_message])
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

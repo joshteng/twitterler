@@ -37,10 +37,10 @@ helpers do
     session.delete(:current_user_id)
   end
 
-  def twitter_client
-    Twitter::Client.new(
-      :oauth_token => current_user.token,
-      :oauth_token_secret => current_user.secret
-    )
-  end
+  # def twitter_client
+  #   Twitter::Client.new(
+  #     :oauth_token => current_user.token,
+  #     :oauth_token_secret => current_user.secret
+  #   )
+  # end
 end

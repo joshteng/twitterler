@@ -30,6 +30,7 @@ require 'sidekiq'
 require 'redis'
 require 'autoscaler'
 require 'autoscaler/sidekiq'
+require 'autoscaler/herokuscaler'
 
 require 'heroku-api'
 

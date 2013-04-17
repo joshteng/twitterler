@@ -16,7 +16,6 @@ require 'active_record'
 require 'logger'
 
 require 'sinatra'
-require 'autoscaler'
 
 if development?
   require "sinatra/reloader"
@@ -29,6 +28,9 @@ require 'oauth'
 require 'twitter'
 require 'sidekiq'
 require 'redis'
+require 'autoscaler'
+require 'autoscaler/sidekiq'
+
 require 'heroku-api'
 
 

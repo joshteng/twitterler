@@ -30,7 +30,7 @@ require 'sidekiq'
 require 'redis'
 require 'autoscaler'
 require 'autoscaler/sidekiq'
-require 'autoscaler/herokuscaler'
+require 'autoscaler/heroku_scaler'
 
 require 'heroku-api'
 
@@ -53,6 +53,7 @@ if Sinatra::Application.development?
   ENV['CONSUMER_SECRET'] = twitter_data['consumer_secret']
   heroku_data = YAML.load_file(APP_ROOT.join('config','heroku.yml'))
   ENV['HEROKU_API_KEY'] = heroku_data['heroku_api']
+  ENV['HEROKU_APP'] = heroku_data['heroku_app']
 end
 
 Twitter.configure do |config|
